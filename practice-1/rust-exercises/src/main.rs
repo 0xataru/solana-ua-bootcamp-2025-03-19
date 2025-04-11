@@ -51,9 +51,7 @@ fn main() {
 }
 
 fn generate_keypair() -> Keypair {
-    let keypair = Keypair::new();
-
-    keypair
+    Keypair::new()
 }
 
 fn load_keypair() -> Keypair {
@@ -62,9 +60,8 @@ fn load_keypair() -> Keypair {
     let private_key = env::var("SECRET_KEY").expect("SECRET_KEY is not set");
     let key_bytes: Vec<u8> =
         serde_json::from_str(&private_key).expect("Failed to parse SECRET_KEY from JSON");
-    let keypair = Keypair::from_bytes(&key_bytes).expect("Invalid secret key");
 
-    keypair
+    Keypair::from_bytes(&key_bytes).expect("Invalid secret key")
 }
 
 fn check_balance(pubkey: &str) -> Result<f64, Box<dyn Error>> {
@@ -187,3 +184,4 @@ mod solana_tests {
         assert!(result.is_ok());
     }
 }
+
